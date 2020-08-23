@@ -14,15 +14,19 @@ class Homepage extends Component {
   };
   submitHandler = (event) => {
     event.preventDefault(); //Prevent page refresh
-    axios
-      .post("http://localhost:8000/reviews", { title: this.state.title })
-      .then((res) => {
-        // console.log(res.data);
-        this.setState({ redirect: `/posts/${res.data._id}` });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (this.state.title === "") {
+      alert("Please enter a valid website URL");
+    } else {
+      axios
+        .post("http://localhost:8000/reviews", { title: this.state.title })
+        .then((res) => {
+          // console.log(res.data);
+          this.setState({ redirect: `/posts/${res.data._id}` });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   renderRedirect = () => {
     if (this.state.redirect !== "") {
