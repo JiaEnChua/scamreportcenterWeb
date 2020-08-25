@@ -10,7 +10,7 @@ class Post extends Component {
     post: null,
     author: "",
     text: "",
-    percentage: 0,
+    // percentage: 0,
   };
 
   getSinglePost = () => {
@@ -18,7 +18,7 @@ class Post extends Component {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
-        this.scanWebsite();
+        // this.scanWebsite();
         this.setState({ post: data });
       });
   };
@@ -29,7 +29,7 @@ class Post extends Component {
     this.setState({ percentage: 10 });
   };
   renderPost = () => {
-    const { percentage } = this.state;
+    // const { percentage } = this.state;
 
     if (this.state.post === null) {
       return <p>There are no post!</p>;
@@ -37,9 +37,10 @@ class Post extends Component {
       return (
         <div>
           <h1>{this.state.post.title}</h1>
+          <h1>{this.state.post.score}</h1>
           <CircularProgressbar
-            value={percentage}
-            text={`${percentage}%`}
+            value={this.state.post.score}
+            text={`${this.state.post.score}%`}
             styles={buildStyles({
               pathTransitionDuration: 0.2,
               textSize: "12px",

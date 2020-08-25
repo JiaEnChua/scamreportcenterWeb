@@ -20,7 +20,7 @@ class Homepage extends Component {
       axios
         .post("http://localhost:8000/reviews", { title: this.state.title })
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           this.setState({ redirect: `/posts/${res.data._id}` });
         })
         .catch((err) => {
