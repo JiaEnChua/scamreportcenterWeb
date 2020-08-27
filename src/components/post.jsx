@@ -5,6 +5,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import "./post.css";
 import Ratings from "react-ratings-declarative";
+import CommentSection from "./commentSection";
 
 class Post extends Component {
   state = {
@@ -29,17 +30,18 @@ class Post extends Component {
     });
   };
   renderPost = () => {
-    if (this.state.post === null) {
+    const { post } = this.state;
+    if (post === null) {
       return <p>There are no post!</p>;
     } else {
       return (
         <div>
-          <h1>{this.state.post.title}</h1>
+          <h1>{post.title}</h1>
           <div className="progressbar">
             <div className="progressbar-pic">
               <CircularProgressbar
-                value={this.state.post.score}
-                text={`${this.state.post.score}%`}
+                value={post.score}
+                text={`${post.score}%`}
                 styles={buildStyles({
                   pathTransitionDuration: 0.2,
                   textSize: "12px",
@@ -47,30 +49,7 @@ class Post extends Component {
               />
             </div>
           </div>
-          <div className="comment-section">
-            <div className="comment-title">
-              <h2>Review Section</h2>
-            </div>
-            {this.state.post.comments.map((comment) => (
-              <div key={comment._id}>
-                <div className="author">
-                  <div className="inline">
-                    <p>{comment.author}:</p>
-                  </div>
-                  <div className="inline">
-                    <Ratings rating={comment.rating} widgetRatedColors="yellow">
-                      <Ratings.Widget widgetDimension="30px" />
-                      <Ratings.Widget widgetDimension="30px" />
-                      <Ratings.Widget widgetDimension="30px" />
-                      <Ratings.Widget widgetDimension="30px" />
-                      <Ratings.Widget widgetDimension="30px" />
-                    </Ratings>
-                  </div>
-                  <p>{comment.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <CommentSection comments={post.comments} />
         </div>
       );
     }
