@@ -53,10 +53,9 @@ class Post extends Component {
             </div>
             {this.state.post.comments.map((comment) => (
               <div key={comment._id}>
-                <p className="author">{comment.author}:</p>
-                <div className="commentStar">
+                <div className="author">
                   <div className="inline">
-                    <p>{comment.text}</p>
+                    <p>{comment.author}:</p>
                   </div>
                   <div className="inline">
                     <Ratings rating={comment.rating} widgetRatedColors="yellow">
@@ -67,6 +66,7 @@ class Post extends Component {
                       <Ratings.Widget widgetDimension="30px" />
                     </Ratings>
                   </div>
+                  <p>{comment.text}</p>
                 </div>
               </div>
             ))}
