@@ -17,7 +17,7 @@ class Post extends Component {
     fetch("http://localhost:8000/reviews/" + this.props.match.params.id)
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ post: data });
+        this.setState({ post: data, author: "", text: "", rating: 0 });
       });
   };
   componentWillMount() {
